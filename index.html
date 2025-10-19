@@ -80,16 +80,16 @@
         a { color: #0056b3; text-decoration: none; }
         a:hover { text-decoration: underline; }
         
-        .screenshot-placeholder { /* スクショ用 */
-            display: block;
-            border: 2px dashed #ced4da;
-            padding: 2rem;
-            text-align: center;
-            color: #6c757d;
-            margin: 1rem 0;
-            border-radius: 4px;
+        .text-description { /* テキスト説明用 */
+            border: 1px solid #ced4da;
+            padding: 1rem;
             background-color: #f8f9fa;
+            border-radius: 4px;
+            margin: 1rem 0;
+            color: #495057;
+            font-size: 0.95rem;
         }
+        .text-description strong { color: #0056b3;}
         
         .important {
             background-color: #fff3cd;
@@ -120,17 +120,20 @@
             <section id="step1">
                 <h2>1. PCで準備 💻</h2>
                 <h3>1-1. フォルダ作成 & VS Code起動</h3>
-                <p>WSL (Ubuntu) ターミナルで実行:</p>
+                <p>WSL (Ubuntu) ターミナルを開き、作業フォルダを作ります。</p>
                 <pre><code class="language-bash">
 cd ~ 
 mkdir hello-azure 
 cd hello-azure
 code .
                 </code></pre>
-                <div class="screenshot-placeholder">[ここにターミナルのスクショ]</div>
+                <div class="text-description">
+                    <strong>【画面説明】</strong> ターミナルにコマンドが入力され、新しいフォルダが作成され、最後に `code .` でVS Codeが起動するはずです。VS Codeのウィンドウが開いたらOK。
+                </div>
                 
                 <h3>1-2. index.html 作成 & コード記述</h3>
-                <p>VS Codeで `index.html` を作成し、以下を貼り付けて保存 (Ctrl+S)。</p>
+                <p>VS Codeの左側にあるエクスプローラー（ファイル一覧）で右クリックし、「新しいファイル」を選び `index.html` という名前でファイルを作成します。</p>
+                <p>作成した `index.html` に以下のコードを貼り付け、保存 (Ctrl+S) します。</p>
                 <pre><code class="language-html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
@@ -143,27 +146,35 @@ code .
 &lt;/body&gt;
 &lt;/html&gt;
                 </code></pre>
-                <div class="screenshot-placeholder">[ここにVS Code編集画面のスクショ]</div>
+                <div class="text-description">
+                    <strong>【画面説明】</strong> VS Codeのエディタ部分に上記のHTMLコードが表示され、ファイルタブの `index.html` の横にある白い丸(●)が消えていれば保存完了です。
+                </div>
 
                 <h3>1-3. Git初期化 & コミット</h3>
-                <p>VS Codeのターミナルで実行:</p>
+                <p>VS Codeの下部にあるターミナルパネルで実行します。</p>
                 <pre><code class="language-bash">
 git init
 git add .
 git commit -m "Initial Hello World page"
                  </code></pre>
+                 <div class="text-description">
+                    <strong>【画面説明】</strong> 各コマンドが実行され、最後に `[main (root-commit) ...] Initial Hello World page` のようなコミット成功メッセージが表示されればOK。
+                </div>
             </section>
             
             <section id="step2">
                  <h2>2. GitHubに保管場所を作る 🐙</h2>
-                 <p>ブラウザで<a href="https://github.com/" target="_blank">GitHub</a> (tt-univアカウント) にアクセスし、**新しいリポジトリ** (`hello-azure`など) を **空の状態で** 作成します。</p>
-                 <div class="screenshot-placeholder">[ここにGitHubリポジトリ作成画面のスクショ]</div>
+                 <p>ブラウザで<a href="https://github.com/" target="_blank">GitHub</a> (tt-univアカウント) にアクセスし、右上の「＋」アイコンから「**New repository**」を選びます。</p>
+                 <p>次の画面で、「**Repository name**」に `hello-azure` と入力し、「**Public**」が選択されていることを確認します。**「Add a README file」などのチェックボックスは全てオフのまま**、緑色の「**Create repository**」ボタンをクリックします。</p>
+                 <div class="text-description">
+                     <strong>【画面説明】</strong> 空のリポジトリのページ（Quick setup という表示があるページ）が表示されれば成功です。このページに表示されているHTTPSのURLを後で使います。
+                 </div>
             </section>
 
             <section id="step3">
                  <h2>3. GitHubへアップロード 🚀</h2>
                  <h3>3-1. 接続先を設定</h3>
-                 <p>VS Codeのターミナルで実行 ([リポジトリURL]は自分のものに):</p>
+                 <p>VS Codeのターミナルで実行します。[リポジトリURL]はGitHubでコピーしたものに置き換えます。</p>
                  <pre><code class="language-bash">
 git remote add origin https://tt-univ@[リポジトリURLのgithub.com以降]
 git branch -M main
@@ -173,9 +184,11 @@ git branch -M main
                  <pre><code class="language-bash">git push -u origin main</code></pre>
                  <div class="important">
                      <strong>【重要】認証</strong><br>
-                     Passwordを聞かれたら、tt-univアカウントの<strong>パーソナルアクセストークン(PAT)</strong> (`repo`+`workflow`権限) を貼り付けます。
+                     Passwordを聞かれたら、tt-univアカウントの<strong>パーソナルアクセストークン(PAT)</strong> (`repo`+`workflow`権限) を貼り付けます。（画面には何も表示されませんが入力されています）
                  </div>
-                 <div class="screenshot-placeholder">[ここにPush成功後のターミナルのスクショ]</div>
+                 <div class="text-description">
+                     <strong>【画面説明】</strong> `Enumerating objects... done.` などが表示され、最後に `Branch 'main' set up to track remote branch 'main' from 'origin'.` と表示されればプッシュ成功です。
+                 </div>
             </section>
             
             <section id="step4">
@@ -185,64 +198,93 @@ git branch -M main
                 
                 <h3>4-2. 基本設定</h3>
                 <ul>
-                    <li>リソースグループ: 新規作成 (`hello-azure-rg` など)</li>
-                    <li>名前: ユニークな名前 (`hello-azure-app-towa` など)</li>
-                    <li>プラン: **Free**</li>
-                    <li>リージョン: **Japan West**</li>
+                    <li><strong>サブスクリプション:</strong> Azure for Students などを選択</li>
+                    <li><strong>リソースグループ:</strong> 「新規作成」をクリックし、`hello-azure-rg` と入力してOK。</li>
+                    <li><strong>名前:</strong> `hello-azure-app-towa` など、世界でユニークな名前を入力。</li>
+                    <li><strong>ホスティングプラン:</strong> **Free** を選択。</li>
+                    <li><strong>リージョン:</strong> **Japan West** (西日本) を選択。</li>
                 </ul>
-                <div class="screenshot-placeholder">[ここにAzure SWA基本設定のスクショ]</div>
+                <div class="text-description">
+                    <strong>【画面説明】</strong> 上記の項目を入力・選択します。名前が他の人と被るとエラーになるので注意。
+                </div>
 
                 <h3>4-3. デプロイ設定</h3>
                 <ul>
-                    <li>ソース: **GitHub** (tt-univアカウントで連携)</li>
-                    <li>組織/リポジトリ/分岐: `tt-univ`, `hello-azure`, `main` を選択</li>
+                    <li><strong>ソース:</strong> **GitHub** を選択し、「GitHubアカウントでサインイン」ボタンを押し、**tt-univアカウント**で認証・連携を許可します。</li>
+                    <li><strong>組織:</strong> ドロップダウンから `tt-univ` を選択。</li>
+                    <li><strong>リポジトリ:</strong> ドロップダウンから `hello-azure` を選択。</li>
+                    <li><strong>分岐:</strong> ドロップダウンから `main` を選択。</li>
                 </ul>
-                 <div class="screenshot-placeholder">[ここにAzure SWAデプロイ設定のスクショ]</div>
+                 <div class="text-description">
+                     <strong>【画面説明】</strong> GitHubアカウント連携後、リポジトリと分岐が正しく選択されていることを確認します。
+                 </div>
                  
                 <h3>4-4. ビルド設定</h3>
                 <ul>
-                     <li>プリセット: **カスタム**</li>
-                     <li>アプリの場所: `/`</li>
-                     <li>API/出力先: **空欄**</li>
+                     <li><strong>ビルドのプリセット:</strong> ドロップダウンから **カスタム** を選択。</li>
+                     <li><strong>アプリの場所:</strong> `/` と入力。（最初から入っているかも）</li>
+                     <li><strong>APIの場所:</strong> **空欄**のまま。</li>
+                     <li><strong>出力先:</strong> **空欄**のまま。</li>
                 </ul>
-                <p>「確認および作成」→「作成」をクリック。</p>
+                
+                <h3>4-5. 作成</h3>
+                <p>「**確認および作成**」ボタンを押し、内容を確認したら「**作成**」ボタンをクリックします。</p>
+                 <div class="text-description">
+                     <strong>【画面説明】</strong> 「デプロイが進行中です」と表示され、しばらく待つと「デプロイが完了しました」に変わります。
+                 </div>
             </section>
 
              <section id="step5">
                 <h2>5. 【重要】「鍵」の修正 🔑</h2>
-                <p>Azureが自動生成した接続情報が間違っていることが多いので、手動で直します。</p>
+                <p>AzureとGitHubの接続設定（デプロイトークン）が自動で正しく行われない場合があるので、手動で確認・修正します。</p>
                 <h3>5-1. Azureから「本物の鍵」取得</h3>
-                <p>Cloud Shellで実行 ([アプリ名], [RG名]は自分のものに):</p>
+                <p>Azure PortalでCloud Shellを開き、以下のコマンドを実行 ([アプリ名], [RG名]は自分のものに):</p>
                 <pre><code class="language-bash">az staticwebapp secrets list --name [アプリ名] --resource-group [RG名]</code></pre>
-                <p>`apiKey`の値をコピーします。</p>
-                <div class="screenshot-placeholder">[ここにCloud Shell実行結果のスクショ]</div>
+                <p>出力結果の中にある `"apiKey": "` の後ろの、**引用符で囲まれた非常に長い文字列**をコピーします。</p>
+                <div class="text-description">
+                    <strong>【画面説明】</strong> Cloud Shellに `{"apiKey": "長い文字列..."}` のようなJSONが表示されます。`apiKey`の値を正確にコピーします。
+                </div>
 
                 <h3>5-2. GitHubから「正しい鍵の名前」取得</h3>
-                <p>VS Codeターミナルで `git pull` してから、`.github/workflows/` 内のYAMLファイルを開き、`secrets.` の後の長い名前 (`AZURE_STATIC_WEB_...`) をコピーします。</p>
-                <div class="screenshot-placeholder">[ここにYAMLファイルから名前をコピーするスクショ]</div>
+                <p>VS Codeターミナルで `git pull origin main` を実行してAzureが自動生成したファイルを取得します。その後、エクスプローラーで `.github/workflows/` フォルダ内のYAMLファイルを開きます。</p>
+                <p>ファイルの中にある `azure_static_web_apps_api_token:` の行を探し、`secrets.` の後ろにある `AZURE_STATIC_WEB_APPS_API_TOKEN_...` という**非常に長い名前**をコピーします。</p>
+                <div class="text-description">
+                    <strong>【画面説明】</strong> VS CodeでYAMLファイルが開き、指定された行の `secrets.` の後の長い名前を確認し、コピーします。
+                </div>
                 
                 <h3>5-3. GitHub Secretsに設定</h3>
-                <p>GitHubリポジトリの「Settings」→「Secrets and variables」→「Actions」で、既存のSecretを削除し、「New repository secret」で以下を設定:</p>
+                <p>GitHubの `hello-azure` リポジトリページの「**Settings**」→「**Secrets and variables**」→「**Actions**」を開きます。</p>
+                <p>既存の `AZURE_STATIC_WEB_APPS_API_TOKEN_...` というSecretがあれば、右のゴミ箱アイコンで**削除**します。</p>
+                <p>「**New repository secret**」ボタンをクリックし、以下を設定:</p>
                 <ul>
-                    <li><strong>Name:</strong> 5-2でコピーした「正しい鍵の名前」</li>
-                    <li><strong>Value:</strong> 5-1でコピーした「本物の鍵」</li>
+                    <li><strong>Name:</strong> 5-2でコピーした「正しい鍵の名前」を貼り付け</li>
+                    <li><strong>Value:</strong> 5-1でコピーした「本物の鍵」を貼り付け</li>
                 </ul>
-                 <div class="screenshot-placeholder">[ここにGitHub Secrets設定画面のスクショ]</div>
+                <p>「**Add secret**」ボタンで保存します。</p>
+                 <div class="text-description">
+                     <strong>【画面説明】</strong> GitHubのSecrets設定画面で、正しい名前と値で新しいSecretが登録されていることを確認します。
+                 </div>
             </section>
 
             <section id="step6">
                 <h2>6. 最後の確認 ✅</h2>
-                <p>GitHubの「Actions」タブで、一番上のデプロイが失敗(❌)していたら、**再実行ボタン(🔄)** を押します。</p>
-                <p>デプロイが成功(✅)したら、Azure Portalで自分のWebアプリの**URL**をクリック！</p>
-                <p>"Hello World from Azure!" と表示されれば**完成です！** 🎉</p>
-                <div class="screenshot-placeholder">[ここに完成したWebサイトのスクショ]</div>
+                <p>GitHubリポジトリの「**Actions**」タブを開きます。一番上のワークフロー実行が失敗(❌)していた場合は、右側にある**再実行ボタン(🔄)** をクリックし、「Re-run failed jobs」を選びます。</p>
+                <p>ワークフローが成功(✅)するのを待ちます（数分かかります）。</p>
+                <div class="text-description">
+                    <strong>【画面説明】</strong> GitHub Actionsの最新の実行結果が緑のチェックマーク✅になればOK。
+                </div>
+                <p>成功したら、Azure Portalで静的Webアプリの「概要」ページに戻り、「**URL**」と書かれたリンクをクリックします。</p>
+                <p>ブラウザで "Hello World from Azure!" と表示されれば、**無事にWebサイトの公開が完了です！** 🎉</p>
+                 <div class="text-description">
+                     <strong>【画面説明】</strong> ブラウザに白い背景で「Hello World from Azure!」という黒い文字が表示されます。
+                 </div>
             </section>
             
         </main>
 
         <footer>
             <p>&copy; 2025 TT-UNIV</p>
-            <p><a href="https://github.com/tt-univ/hello-azure" target="_blank">[このサイトのGitHubリポジトリ]</a></p>
+            <p><a href="https://github.com/tt-univ/hello-azure" target="_blank">[このサイトのGitHubリポジトリ (hello-azure)]</a></p>
         </footer>
     </div>
 
