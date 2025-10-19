@@ -2,9 +2,249 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Azure!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello WorldをAzureで公開する手順</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Meiryo, system-ui, sans-serif;
+            line-height: 1.8;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        header {
+            background-color: #0078d4;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        header h1 { margin: 0; font-size: 2.2rem; }
+        
+        main {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        section { margin-bottom: 2.5rem; border-bottom: 1px solid #eee; padding-bottom: 1.5rem; }
+        section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0;}
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #0078d4;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: #495057;
+            border-left: 4px solid #0078d4;
+            padding-left: 0.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol { padding-left: 25px; }
+        li { margin-bottom: 0.8rem; }
+        
+        code {
+            background-color: #e9ecef;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.9em;
+            color: #333;
+        }
+        pre code {
+            display: block;
+            padding: 1rem;
+            background-color: #343a40;
+            color: #f8f9fa;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        a { color: #0056b3; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        
+        .screenshot-placeholder { /* スクショ用 */
+            display: block;
+            border: 2px dashed #ced4da;
+            padding: 2rem;
+            text-align: center;
+            color: #6c757d;
+            margin: 1rem 0;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+        
+        .important {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        .important strong { color: #856404; }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello World from Azure!</h1>
+
+    <div class="container">
+        <header>
+            <h1>Hello WorldをAzureで公開する手順</h1>
+        </header>
+
+        <main>
+            <section id="step1">
+                <h2>1. PCで準備 💻</h2>
+                <h3>1-1. フォルダ作成 & VS Code起動</h3>
+                <p>WSL (Ubuntu) ターミナルで実行:</p>
+                <pre><code class="language-bash">
+cd ~ 
+mkdir hello-azure 
+cd hello-azure
+code .
+                </code></pre>
+                <div class="screenshot-placeholder">[ここにターミナルのスクショ]</div>
+                
+                <h3>1-2. index.html 作成 & コード記述</h3>
+                <p>VS Codeで `index.html` を作成し、以下を貼り付けて保存 (Ctrl+S)。</p>
+                <pre><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Hello Azure!&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello World from Azure!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                </code></pre>
+                <div class="screenshot-placeholder">[ここにVS Code編集画面のスクショ]</div>
+
+                <h3>1-3. Git初期化 & コミット</h3>
+                <p>VS Codeのターミナルで実行:</p>
+                <pre><code class="language-bash">
+git init
+git add .
+git commit -m "Initial Hello World page"
+                 </code></pre>
+            </section>
+            
+            <section id="step2">
+                 <h2>2. GitHubに保管場所を作る 🐙</h2>
+                 <p>ブラウザで<a href="https://github.com/" target="_blank">GitHub</a> (tt-univアカウント) にアクセスし、**新しいリポジトリ** (`hello-azure`など) を **空の状態で** 作成します。</p>
+                 <div class="screenshot-placeholder">[ここにGitHubリポジトリ作成画面のスクショ]</div>
+            </section>
+
+            <section id="step3">
+                 <h2>3. GitHubへアップロード 🚀</h2>
+                 <h3>3-1. 接続先を設定</h3>
+                 <p>VS Codeのターミナルで実行 ([リポジトリURL]は自分のものに):</p>
+                 <pre><code class="language-bash">
+git remote add origin https://tt-univ@[リポジトリURLのgithub.com以降]
+git branch -M main
+                 </code></pre>
+                 
+                 <h3>3-2. プッシュ！</h3>
+                 <pre><code class="language-bash">git push -u origin main</code></pre>
+                 <div class="important">
+                     <strong>【重要】認証</strong><br>
+                     Passwordを聞かれたら、tt-univアカウントの<strong>パーソナルアクセストークン(PAT)</strong> (`repo`+`workflow`権限) を貼り付けます。
+                 </div>
+                 <div class="screenshot-placeholder">[ここにPush成功後のターミナルのスクショ]</div>
+            </section>
+            
+            <section id="step4">
+                <h2>4. Azureで公開場所を作る ☁️</h2>
+                <h3>4-1. Static Web Apps 作成</h3>
+                <p><a href="https://portal.azure.com/" target="_blank">Azure Portal</a>で「静的 Web アプリ」を検索し「作成」。</p>
+                
+                <h3>4-2. 基本設定</h3>
+                <ul>
+                    <li>リソースグループ: 新規作成 (`hello-azure-rg` など)</li>
+                    <li>名前: ユニークな名前 (`hello-azure-app-towa` など)</li>
+                    <li>プラン: **Free**</li>
+                    <li>リージョン: **Japan West**</li>
+                </ul>
+                <div class="screenshot-placeholder">[ここにAzure SWA基本設定のスクショ]</div>
+
+                <h3>4-3. デプロイ設定</h3>
+                <ul>
+                    <li>ソース: **GitHub** (tt-univアカウントで連携)</li>
+                    <li>組織/リポジトリ/分岐: `tt-univ`, `hello-azure`, `main` を選択</li>
+                </ul>
+                 <div class="screenshot-placeholder">[ここにAzure SWAデプロイ設定のスクショ]</div>
+                 
+                <h3>4-4. ビルド設定</h3>
+                <ul>
+                     <li>プリセット: **カスタム**</li>
+                     <li>アプリの場所: `/`</li>
+                     <li>API/出力先: **空欄**</li>
+                </ul>
+                <p>「確認および作成」→「作成」をクリック。</p>
+            </section>
+
+             <section id="step5">
+                <h2>5. 【重要】「鍵」の修正 🔑</h2>
+                <p>Azureが自動生成した接続情報が間違っていることが多いので、手動で直します。</p>
+                <h3>5-1. Azureから「本物の鍵」取得</h3>
+                <p>Cloud Shellで実行 ([アプリ名], [RG名]は自分のものに):</p>
+                <pre><code class="language-bash">az staticwebapp secrets list --name [アプリ名] --resource-group [RG名]</code></pre>
+                <p>`apiKey`の値をコピーします。</p>
+                <div class="screenshot-placeholder">[ここにCloud Shell実行結果のスクショ]</div>
+
+                <h3>5-2. GitHubから「正しい鍵の名前」取得</h3>
+                <p>VS Codeターミナルで `git pull` してから、`.github/workflows/` 内のYAMLファイルを開き、`secrets.` の後の長い名前 (`AZURE_STATIC_WEB_...`) をコピーします。</p>
+                <div class="screenshot-placeholder">[ここにYAMLファイルから名前をコピーするスクショ]</div>
+                
+                <h3>5-3. GitHub Secretsに設定</h3>
+                <p>GitHubリポジトリの「Settings」→「Secrets and variables」→「Actions」で、既存のSecretを削除し、「New repository secret」で以下を設定:</p>
+                <ul>
+                    <li><strong>Name:</strong> 5-2でコピーした「正しい鍵の名前」</li>
+                    <li><strong>Value:</strong> 5-1でコピーした「本物の鍵」</li>
+                </ul>
+                 <div class="screenshot-placeholder">[ここにGitHub Secrets設定画面のスクショ]</div>
+            </section>
+
+            <section id="step6">
+                <h2>6. 最後の確認 ✅</h2>
+                <p>GitHubの「Actions」タブで、一番上のデプロイが失敗(❌)していたら、**再実行ボタン(🔄)** を押します。</p>
+                <p>デプロイが成功(✅)したら、Azure Portalで自分のWebアプリの**URL**をクリック！</p>
+                <p>"Hello World from Azure!" と表示されれば**完成です！** 🎉</p>
+                <div class="screenshot-placeholder">[ここに完成したWebサイトのスクショ]</div>
+            </section>
+            
+        </main>
+
+        <footer>
+            <p>&copy; 2025 TT-UNIV</p>
+            <p><a href="https://github.com/tt-univ/hello-azure" target="_blank">[このサイトのGitHubリポジトリ]</a></p>
+        </footer>
+    </div>
+
 </body>
 </html>
